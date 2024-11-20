@@ -10,6 +10,12 @@ function index (req, res) {
 function show (req, res) {
     const id = parseInt(req.params.id)
     console.log(`Ecco il post con id: ${id}`) 
+    const foundPost = posts.find((post) => post.id === id)
+    let result = foundPost
+
+    res.json(result)
+
+
 }
 
 //store function

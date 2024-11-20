@@ -1,5 +1,5 @@
 const express = require('express')
-const router = express.router()
+const router = express.Router()
 const postsController = require('../controllers/postsController.js')
 
 //index router function

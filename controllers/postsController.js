@@ -36,7 +36,11 @@ function modify (req, res) {
 //destroy function
 function destroy (req, res) {
     const id = parseInt(req.params.id)
-    console.log(`Elimino la pizza con id: ${id}`)
+    console.log(`Elimino il post con id: ${id}`)
+
+    const postIndex = posts.findIndex((post) => post.id === id)
+    posts.splice(postIndex, 1)
+    res.json(posts);
 }
 
 module.exports = { index, show, store, update, modify, destroy }

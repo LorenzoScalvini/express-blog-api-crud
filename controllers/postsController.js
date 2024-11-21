@@ -1,46 +1,141 @@
 const posts = require('../data/posts.js')
 
-//index function
-function index (req, res) {
+// Index function
+function index(req, res) {
     console.log("Questi sono i tuoi post")
     res.json(posts);
 }
 
-//show function
-function show (req, res) {
-    const id = parseInt(req.params.id)
-    console.log(`Ecco il post con id: ${id}`) 
-    const foundPost = posts.find((post) => post.id === id)
-    let result = foundPost
+// Show function
+function show(req, res) {
+    const id = parseInt(req.params.id);
+    console.log(`Ecco il post con id: ${id}`); 
+    const foundPost = posts.find((post) => post.id === id);
 
-    res.json(result)
+    if (!foundPost) {
+        return res.status(404).json({ error: 'Post non trovato' });
+    }
 
-
+    res.json(foundPost);
 }
 
-//store function
-function store (req, res) {
-    
+// Store function
+function store(req, res) {
+    console.log(req.body);
+    const { title, slug, content, image, tags } = req.body;
+
+    // Validazione dei dati
+    const errors = validate(req);
+
+    if (errors.length) {
+        return res.status(400).json({
+            error: 'Richiesta non valida',
+            messages: errors,
+        });
+    }
+
+    const newPost = {
+        id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1, 
+        title,
+        slug,
+        content,
+        image,
+        tags,
+    };
+
+    posts.push(newPost); 
+    res.status(201).json(newPost); 
 }
 
-//update function
-function update (req, res) {
-    
+// Funzione di validazione
+function validate(req) {
+    const { title, slug, content, image, tags } = req.body;
+    const errors = [];
+
+    if (!title) {
+        errors.push('Title è richiesto');
+    }
+
+    if (!slug) {
+        errors.push('Slug è richiesto');
+    }
+
+    if (!image) {
+        errors.push('Immagine è richiesta');
+    }
+
+    if (!content) {
+        errors.push('Contenuto è richiesto');
+    }
+
+    if (!tags || tags.length === 0) {
+        errors.push('Almeno un tag è richiesto');
+    }
+
+    return errors;
 }
 
-//modify function
-function modify (req, res) {
-    
+// Update function
+function update(req, res) {
+    const id = parseInt(req.params.id);
+    const foundPost = posts.find((post) => post.id === id);
+
+    if (!foundPost) {
+        return res.status(404).json({ error: 'Post non trovato' });
+    }
+
+    const { title, slug, content, image, tags } = req.body;
+    const errors = validate(req);
+
+    if (errors.length) {
+        return res.status(400).json({
+            error: 'Richiesta non trovata',
+            messages: errors,
+        });
+    }
+
+    // Modifica il post
+    foundPost.title = title || foundPost.title;
+    foundPost.slug = slug || foundPost.slug;
+    foundPost.content = content || foundPost.content;
+    foundPost.image = image || foundPost.image;
+    foundPost.tags = tags || foundPost.tags;
+
+    res.json(foundPost);
 }
 
-//destroy function
-function destroy (req, res) {
-    const id = parseInt(req.params.id)
-    console.log(`Elimino il post con id: ${id}`)
+// Modify function 
+function modify(req, res) {
+    const id = parseInt(req.params.id);
+    const foundPost = posts.find((post) => post.id === id);
 
-    const postIndex = posts.findIndex((post) => post.id === id)
-    posts.splice(postIndex, 1)
-    res.json(posts);
+    if (!foundPost) {
+        return res.status(404).json({ error: 'Post non trovato' });
+    }
+
+    const { title, slug, content, image, tags } = req.body;
+
+    if (title) foundPost.title = title;
+    if (slug) foundPost.slug = slug;
+    if (content) foundPost.content = content;
+    if (image) foundPost.image = image;
+    if (tags) foundPost.tags = tags;
+
+    res.json(foundPost);
 }
 
-module.exports = { index, show, store, update, modify, destroy }
+function destroy(req, res) {
+    const id = parseInt(req.params.id);
+    console.log(`Elimino il post con id: ${id}`);
+
+    const postIndex = posts.findIndex((post) => post.id === id);
+
+    if (postIndex === -1) {
+        return res.status(404).json({ error: 'Post not found' });
+    }
+
+    posts.splice(postIndex, 1); 
+    res.json({ message: 'Post eliminato con successo' });
+}
+
+module.exports = { index, show, store, update, modify, destroy };

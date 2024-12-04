@@ -11,10 +11,6 @@ const port = 3017;
 
 app.use(cors());
 
-app.get("/products/:id", function (req, res, next) {
-  res.json({ msg: "Cors abilitato per tutte le origini" });
-});
-
 app.use(express.json());
 app.use(express.static("public"));
 

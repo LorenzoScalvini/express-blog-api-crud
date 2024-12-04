@@ -6,13 +6,17 @@ const {
   notFoundHandler,
   errorHandler,
 } = require("./middlewares/errorHandlers");
+const path = require("path");
+
 const app = express();
 const port = 3017;
 
 app.use(cors());
-
 app.use(express.json());
-app.use(express.static("public"));
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.get("/", (req, res) => {
   console.log("Questa e' la root!");
@@ -22,7 +26,6 @@ app.get("/", (req, res) => {
 app.use("/posts", postsRouter);
 
 app.use(notFoundHandler);
-
 app.use(errorHandler);
 
 app.listen(port, () => {

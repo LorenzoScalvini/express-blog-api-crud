@@ -1,45 +1,115 @@
 const posts = [
   {
     id: 1,
-    title: "Ciambellone",
-    content: "Sarà che una volta le cose erano più semplici, ma erano anche molto buone. Come le crostate, i biscotti o il ciambellone che la nonna preparava anche all'ultimo sapendo che sareste passati per la merenda: uova, zucchero e farina. Niente di più basic ma che tra le sue mani, mescolando e infornando, diventava una delle prelibatezze per accompagnare il succo di frutta al pomeriggio o il latte e caffè al mattino. Ecco la nostra ricetta del ciambellone a quale atmosfera si ispira, quella di casa e genuinità: con una manciata di scorze di limone o di arancia e una spolverata di zucchero a velo renderete questa soffice delizia profumata e invitante. E per una volta sarà la nonna a farvi i complimenti per aver preparato un morbido ciambellone, così buono che non passa mai di moda!",
-    image: "ciambellone.jpeg",
-    tags: ["Dolci", "Torte", "Ricette vegetariane", "Ricette al forno"],
+    title: "Link - Ocarina of Time",
+    content:
+      "Il giovane eroe destinato a salvare Hyrule dal dominio di Ganondorf, viaggiando nel tempo e risolvendo misteri tra passato e futuro.",
+    image: "link_ocarina.jpg",
+    tags: ["Eroe", "Viaggio nel tempo", "Hyrule", "Avventura"],
   },
   {
     id: 2,
-    title: "Cracker alla barbabietola",
-    content: `I cracker alla barbabietola sono uno snack stuzzicante e originale da preparare in casa utilizzando ingredienti semplici e genuini. Queste sfogliette dal colore brillante non passeranno inosservate nel vostro cestino del pane e arricchiranno la tavola con il loro gusto unico e accattivante. I cracker fatti a mano sono anche un gustoso snack spezza fame, da portare in ufficio o a scuola. Venite a scoprire il nostro mix di semi e cereali per realizzare l'impasto e divertitevi a sperimentare nuove ricette di cracker variando i semi, le farine e le spezie per gusti sempre nuovi, ecco qualche idea:
-              Cracker di farro
-              Cracker di lupini
-              Cracker allo zafferano
-              Cracker ai semi`,
-    image: "cracker_barbabietola.jpeg",
-    tags: ["Antipasti", "Ricette vegetariane", "Ricette al forno"],
+    title: "Link - Majora's Mask",
+    content:
+      "Intrappolato nel mondo di Termina, deve fermare la luna che minaccia di distruggere il mondo in soli tre giorni, usando le maschere magiche.",
+    image: "link_majora.jpg",
+    tags: ["Eroe", "Termina", "Maschere", "Tempo"],
   },
   {
     id: 3,
-    title: "Pasta barbabietola e gorgonzola",
-    content: `La nostra ricetta della pasta barbabietola e gorgonzola vuole ricreare in questo primo piatto un abbinamento appetitoso, già proposto con la torta salata alla barbabietola! Per un pranzo veloce ma gustoso, per chi ama giocare con consistenze e colori naturali in cucina, questa pasta è perfetta! La dolcezza della barbabietola smorza il gusto deciso che caratterizza questo formaggio erborinato molto amato, un'abbinata vincente e molto gustosa. Provate un nuovo condimento per la vostra pasta e sperimentate altre sfiziose varianti:
-            Pasta con barbabietola e pecorino
-            Gnocchi di barbabietola
-            Tagliatelle alla barbabietola con asparagi`,
-    image: "pasta_barbabietola.jpeg",
-    tags: ["Primi piatti", "Ricette vegetariane"],
+    title: "Link - The Wind Waker",
+    content:
+      "Un giovane di un'isola sperduta si imbarca in un'avventura per salvare sua sorella e affrontare un antico male, solcando un vasto mare.",
+    image: "link_wind_waker.jpg",
+    tags: ["Eroe", "Oceano", "Navigazione", "Avventura"],
   },
   {
     id: 4,
-    title: "Pane fritto dolce",
-    content: `Il pane fritto dolce è la versione più antica dell'odierno french toast! Una deliziosa ricetta antispreco che le nonne preparavano ai bambini per merenda, utilizzando gli ingredienti che si avevano sempre a disposizione in casa: pane raffermo, uova, latte e zucchero, che noi abbiamo deciso di aromatizzare con un pizzico di cannella. Facile e veloce da realizzare, il pane fritto dolce vi riporterà con la mente ai sapori dell'infanzia… gustatelo da solo o accompagnatelo con frutta fresca e yogurt per uno spuntino tanto goloso quanto genuino!`,
-    image: "pane_fritto_dolce.jpeg",
-    tags: ["Dolci", "Dolci veloci", "Ricette veloci", "Ricette vegetariane"],
+    title: "Link - Twilight Princess",
+    content:
+      "Trasformato in un lupo, deve combattere per riportare la luce in un regno coperto dall'oscurità del Crepuscolo.",
+    image: "link_twilight.jpg",
+    tags: ["Eroe", "Lupo", "Crepuscolo", "Oscurità"],
   },
   {
     id: 5,
-    title: "Torta paesana",
-    content: `La torta paesana è un dolce di origine lombarda e precisamente della Brianza, la zona compresa tra la provincia a nord di Milano e il lago di Lecco-Como. E' un dolce di origine contadina, dalle infinite varianti, ma realizzata principalmente con pane raffermo bagnato nel latte. E' infatti conosciuta anche come torta di pane o, in dialetto locale, “michelacc” ovvero mica e lac (pane e latte). A seconda dei gusti e delle disponibilità del momento, al pane ammollato ogni famiglia univa ingredienti diversi, chi l'uvetta o chi i pinoli ad esempio. Noi vi presentiamo la nostra versione con l'aggiunta di cacao e amaretti: perfetta da gustare per una merenda dal sapore rustico, la torta paesana è un perfetto dolce di recupero quando si ha del pane avanzato… ed è ancora più buona il giorno dopo!`,
-    image: "torta_paesana.jpeg",
-    tags: ["Dolci", "Dolci al cioccolato", "Torte", "Ricette vegetariane", "Ricette al forno"],
+    title: "Link - Skyward Sword",
+    content:
+      "Un cavaliere celeste che viaggia tra cielo e terra per sconfiggere il male e salvare Zelda, in una storia che racconta l'origine della leggenda.",
+    image: "link_skyward.jpg",
+    tags: ["Eroe", "Cielo", "Origine", "Avventura"],
+  },
+  {
+    id: 6,
+    title: "Link - Breath of the Wild",
+    content:
+      "Risvegliatosi da un lungo sonno, deve esplorare una Hyrule devastata per fermare Calamity Ganon e ricostruire il regno.",
+    image: "link_botw.jpg",
+    tags: ["Eroe", "Esplorazione", "Hyrule", "Calamità"],
+  },
+  {
+    id: 7,
+    title: "Link - Tears of the Kingdom",
+    content:
+      "Protagonista della lotta contro una minaccia antica, esplora cieli e sotterranei in una Hyrule trasformata.",
+    image: "link_totk.jpg",
+    tags: ["Eroe", "Cieli", "Sotterranei", "Avventura"],
+  },
+  {
+    id: 8,
+    title: "Link - A Link to the Past",
+    content:
+      "Un giovane eroe che attraversa il regno di Hyrule e il mondo oscuro per salvare Zelda e recuperare la Triforza.",
+    image: "link_past.jpg",
+    tags: ["Eroe", "Hyrule", "Mondo oscuro", "Triforza"],
+  },
+  {
+    id: 9,
+    title: "Link - Link's Awakening",
+    content:
+      "Naufrago sull'isola di Koholint, deve risvegliare il Pesce Vento per tornare a casa, affrontando i segreti dell'isola.",
+    image: "link_awakening.jpg",
+    tags: ["Eroe", "Isola", "Sogno", "Avventura"],
+  },
+  {
+    id: 10,
+    title: "Link - Oracle of Ages & Seasons",
+    content:
+      "Un eroe che viaggia attraverso il tempo e le stagioni per sconfiggere le forze oscure che minacciano i regni di Labrynna e Holodrum.",
+    image: "link_oracle.jpg",
+    tags: ["Eroe", "Tempo", "Stagioni", "Avventura"],
+  },
+  {
+    id: 11,
+    title: "Link - The Minish Cap",
+    content:
+      "Con l'aiuto di un cappello magico, Link si riduce alle dimensioni dei Minish per salvare Hyrule da un'antica minaccia.",
+    image: "link_minish_cap.jpg",
+    tags: ["Eroe", "Minish", "Magia", "Hyrule"],
+  },
+  {
+    id: 12,
+    title: "Link - Four Swords",
+    content:
+      "Diviso in quattro copie di sé stesso, collabora con le sue altre versioni per sconfiggere Vaati e salvare Hyrule.",
+    image: "link_four_swords.jpg",
+    tags: ["Eroe", "Cooperazione", "Vaati", "Avventura"],
+  },
+  {
+    id: 13,
+    title: "Link - Phantom Hourglass",
+    content:
+      "Navigando su un vasto oceano, Link deve trovare la via per salvare Tetra e fermare le forze oscure che minacciano il mondo.",
+    image: "link_phantom_hourglass.jpg",
+    tags: ["Eroe", "Oceano", "Navigazione", "Avventura"],
+  },
+  {
+    id: 14,
+    title: "Link - Spirit Tracks",
+    content:
+      "Un giovane conduttore di treni deve proteggere Zelda e fermare un antico male viaggiando su binari magici attraverso Hyrule.",
+    image: "link_spirit_tracks.jpg",
+    tags: ["Eroe", "Binari magici", "Treni", "Hyrule"],
   },
 ];
 

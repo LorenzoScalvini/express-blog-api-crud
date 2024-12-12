@@ -1,133 +1,129 @@
-const posts = require('../data/posts.js');
+const posts = require("../data/posts.js");
+
+// Utility function per la validazione dei dati
+function validatePostData(postData) {
+  const errors = [];
+  const { title, content, image, tags } = postData;
+
+  if (!title?.trim()) {
+    errors.push("Title is required and cannot be empty");
+  }
+
+  if (!image?.trim()) {
+    errors.push("Image is required and cannot be empty");
+  }
+
+  if (!content?.trim()) {
+    errors.push("Content is required and cannot be empty");
+  }
+
+  if (!tags || !Array.isArray(tags) || tags.length === 0) {
+    errors.push("At least one tag is required");
+  }
+
+  return errors;
+}
+
+function handleNotFound(res, next) {
+  const error = new Error("Post not found");
+  error.status = 404;
+  return next(error);
+}
 
 // Index function
 function index(req, res) {
-    console.log("Questi sono i tuoi post");
-    res.json(posts);
+  res.json(posts);
 }
 
 // Show function
 function show(req, res, next) {
-    const id = parseInt(req.params.id);
-    console.log(`Ecco il post con id: ${id}`); 
-    const foundPost = posts.find((post) => post.id === id);
+  const id = parseInt(req.params.id);
+  const foundPost = posts.find((post) => post.id === id);
 
-    if (!foundPost) {
-        return next(new Error('Post non trovato')); 
-    }
+  if (!foundPost) {
+    return handleNotFound(res, next);
+  }
 
-    res.json(foundPost);
+  res.json(foundPost);
 }
 
 // Store function
 function store(req, res, next) {
-    console.log(req.body);
-    const { title, content, image, tags } = req.body;
+  const postData = req.body;
+  const errors = validatePostData(postData);
 
-    // Validazione dei dati
-    const errors = validate(req);
+  if (errors.length) {
+    const error = new Error("Invalid request");
+    error.status = 400;
+    error.messages = errors;
+    return next(error);
+  }
 
-    if (errors.length) {
-        const error = new Error('Richiesta non valida');
-        error.status = 400;
-        error.messages = errors;
-        return next(error);
-    }
+  const newPost = {
+    id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1,
+    ...postData,
+  };
 
-    const newPost = {
-        id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1,
-        title,
-        content,
-        image,
-        tags,
-    };
-
-    posts.push(newPost);
-    res.status(201).json(newPost);
-}
-
-function validate(req) {
-    const { title, content, image, tags } = req.body;
-    const errors = [];
-
-    if (!title) {
-        errors.push('Title è richiesto');
-    }
-
-    if (!image) {
-        errors.push('Immagine è richiesta');
-    }
-
-    if (!content) {
-        errors.push('Contenuto è richiesto');
-    }
-
-    if (!tags || tags.length === 0) {
-        errors.push('Almeno un tag è richiesto');
-    }
-
-    return errors;
+  posts.push(newPost);
+  res.status(201).json(newPost);
 }
 
 // Update function
 function update(req, res, next) {
-    const id = parseInt(req.params.id);
-    const foundPost = posts.find((post) => post.id === id);
+  const id = parseInt(req.params.id);
+  const postData = req.body;
+  const foundPost = posts.find((post) => post.id === id);
 
-    if (!foundPost) {
-        return next(new Error('Post non trovato')); 
-    }
+  if (!foundPost) {
+    return handleNotFound(res, next);
+  }
 
-    const { title, content, image, tags } = req.body;
-    const errors = validate(req);
+  const errors = validatePostData(postData);
 
-    if (errors.length) {
-        const error = new Error('Richiesta non valida');
-        error.status = 400;
-        error.messages = errors;
-        return next(error); 
-    }
+  if (errors.length) {
+    const error = new Error("Invalid request");
+    error.status = 400;
+    error.messages = errors;
+    return next(error);
+  }
 
-    foundPost.title = title || foundPost.title;
-    foundPost.content = content || foundPost.content;
-    foundPost.image = image || foundPost.image;
-    foundPost.tags = tags || foundPost.tags;
+  const updatedPost = { ...foundPost, ...postData };
+  const postIndex = posts.findIndex((post) => post.id === id);
+  posts[postIndex] = updatedPost;
 
-    res.json(foundPost);
+  res.json(updatedPost);
 }
 
 // Modify function
 function modify(req, res, next) {
-    const id = parseInt(req.params.id);
-    const foundPost = posts.find((post) => post.id === id);
+  const id = parseInt(req.params.id);
+  const foundPost = posts.find((post) => post.id === id);
 
-    if (!foundPost) {
-        return next(new Error('Post non trovato')); 
-    }
+  if (!foundPost) {
+    return handleNotFound(res, next);
+  }
 
-    const { title, content, image, tags } = req.body;
+  const { title, content, image, tags } = req.body;
 
-    if (title) foundPost.title = title;
-    if (content) foundPost.content = content;
-    if (image) foundPost.image = image;
-    if (tags) foundPost.tags = tags;
+  if (title) foundPost.title = title;
+  if (content) foundPost.content = content;
+  if (image) foundPost.image = image;
+  if (tags) foundPost.tags = tags;
 
-    res.json(foundPost);
+  res.json(foundPost);
 }
 
 // Destroy function
 function destroy(req, res, next) {
-    const id = parseInt(req.params.id);
-    console.log(`Elimino il post con id: ${id}`);
+  const id = parseInt(req.params.id);
+  const postIndex = posts.findIndex((post) => post.id === id);
 
-    const postIndex = posts.findIndex((post) => post.id === id);
+  if (postIndex === -1) {
+    return handleNotFound(res, next);
+  }
 
-    if (postIndex === -1) {
-        return next(new Error('Post non trovato')); 
-    }
-
-    posts.splice(postIndex, 1);
-    res.json({ message: 'Post eliminato con successo' });
+  posts.splice(postIndex, 1);
+  res.status(200).json({ message: "Post deleted successfully" });
 }
 
 module.exports = { index, show, store, update, modify, destroy };
